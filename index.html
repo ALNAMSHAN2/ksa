@@ -1,0 +1,484 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تاريخ المملكة العربية السعودية | ثلاثة قرون من المجد</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #006C35;
+      --green-dark: #004D26;
+      --gold: #D4AF37;
+      --gold-light: #F3E5AB;
+      --cream: #FDFBF7;
+      --text: #1a1a1a;
+      --muted: #5a5a5a;
+      --shadow: 0 8px 30px rgba(0, 108, 53, 0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ===== الرأس ===== */
+    header {
+      position: relative;
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+      color: #fff;
+      padding: 80px 20px 100px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -10%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    header::after {
+      content: '🇸🇦';
+      position: absolute;
+      bottom: -30px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 120px;
+      opacity: 0.08;
+    }
+
+    .header-badge {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      padding: 6px 22px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 span { color: var(--gold-light); }
+
+    header p {
+      font-size: clamp(16px, 2vw, 20px);
+      max-width: 650px;
+      margin: 0 auto;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .divider {
+      width: 80px; height: 3px;
+      background: var(--gold);
+      margin: 28px auto 0;
+      border-radius: 3px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== الحاوية ===== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== مقدمة ===== */
+    .intro {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 36px;
+      margin: -50px auto 60px;
+      position: relative;
+      z-index: 2;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--gold);
+      max-width: 900px;
+    }
+
+    .intro h2 {
+      color: var(--green);
+      font-size: 26px;
+      margin-bottom: 14px;
+    }
+
+    .intro p { color: var(--muted); font-size: 17px; }
+
+    /* ===== الخط الزمني ===== */
+    .timeline-section { padding: 20px 0 70px; }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(26px, 3.5vw, 36px);
+      color: var(--green);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .section-title p { color: var(--muted); font-size: 16px; }
+
+    .timeline { position: relative; padding-right: 40px; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      right: 14px; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--gold), var(--green), var(--gold));
+      border-radius: 3px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      right: -33px; top: 22px;
+      width: 16px; height: 16px;
+      background: var(--gold);
+      border: 3px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px var(--green);
+    }
+
+    .timeline-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px 26px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-right: 4px solid var(--gold);
+    }
+
+    .timeline-card:hover {
+      transform: translateX(-6px);
+      box-shadow: 0 10px 30px rgba(0, 108, 53, 0.15);
+    }
+
+    .timeline-date {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .timeline-card h3 {
+      color: var(--green-dark);
+      font-size: 21px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-card p { color: var(--muted); font-size: 16px; }
+
+    .timeline-card .highlight {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ===== بطاقات الإنجازات ===== */
+    .achievements {
+      background: linear-gradient(135deg, var(--green-dark), var(--green));
+      padding: 70px 0;
+      color: #fff;
+      margin: 40px 0;
+    }
+
+    .achievements .section-title h2 { color: #fff; }
+    .achievements .section-title p { color: rgba(255,255,255,0.75); }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 10px;
+    }
+
+    .achievement-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 16px;
+      padding: 28px 22px;
+      text-align: center;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .achievement-card.visible { opacity: 1; transform: translateY(0); }
+
+    .achievement-card:hover {
+      background: rgba(212, 175, 55, 0.15);
+      transform: translateY(-6px);
+    }
+
+    .achievement-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .achievement-card h3 {
+      color: var(--gold-light);
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .achievement-card p { font-size: 15px; opacity: 0.85; }
+
+    /* ===== رؤية 2030 ===== */
+    .vision {
+      background: #fff;
+      border-radius: 20px;
+      padding: 44px 36px;
+      margin: 60px auto;
+      max-width: 900px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .vision h2 {
+      color: var(--green);
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .vision p { color: var(--muted); font-size: 17px; max-width: 700px; margin: 0 auto; }
+
+    .vision .year {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--green-dark);
+      font-weight: 800;
+      padding: 4px 18px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    /* ===== التذييل ===== */
+    footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      padding: 36px 20px;
+      font-size: 15px;
+    }
+
+    footer .heart { color: var(--gold); }
+
+    /* ===== استجابة الجوال ===== */
+    @media (max-width: 600px) {
+      header { padding: 60px 16px 80px; }
+      .intro { padding: 28px 22px; margin-top: -40px; }
+      .timeline { padding-right: 30px; }
+      .timeline::before { right: 10px; }
+      .timeline-item::before { right: -27px; width: 14px; height: 14px; }
+      .timeline-card { padding: 22px 18px; }
+      .vision { padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الرأس -->
+  <header>
+    <span class="header-badge">منذ 1727م · ثلاثة قرون من المجد</span>
+    <h1>تاريخ <span>المملكة العربية السعودية</span></h1>
+    <p>رحلة من الدرعية الصغيرة إلى مملكة الحرمين الشريفين، ومسيرة توحيد وبناء ونهضة لم تتوقف.</p>
+    <div class="divider"></div>
+  </header>
+
+  <!-- المقدمة -->
+  <div class="container">
+    <div class="intro">
+      <h2>حكاية وطن</h2>
+      <p>
+        لم تكن المملكة العربية السعودية وليدة اللحظة، بل هي امتداد لثلاثة قرون من التاريخ.
+        بدأت الحكاية في <strong>الدرعية</strong> عام 1727م، حين أسس الإمام محمد بن سعود الدولة السعودية الأولى،
+        لتبدأ مسيرة وحدة واستقرار في قلب الجزيرة العربية، تواصلت عبر الدولة السعودية الثانية،
+        حتى توجها الملك عبدالعزيز بن عبدالرحمن آل سعود بتوحيد البلاد وإعلان المملكة العربية السعودية عام 1932م.
+      </p>
+    </div>
+  </div>
+
+  <!-- الخط الزمني -->
+  <section class="timeline-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>المحطات الكبرى</h2>
+        <p>من التأسيس إلى التوحيد، مرورًا بمسيرة الصمود والاستعادة</p>
+      </div>
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <span class="timeline-date">1727م / 1139هـ</span>
+            <h3>تأسيس الدولة السعودية الأولى</h3>
+            <p>
+              تولى الإمام <span class="highlight">محمد بن سعود</span> حكم الدرعية، وأرسى قواعد دولة مركزية
+              قائمة على العدل والأمن، واتخذ من الدرعية عاصمة لها. وتوسعت الدولة لاحقًا لتوحيد أغلب مناطق نجد.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <span class="timeline-date">1744م / 1157هـ</span>
+            <h3>اللقاء التاريخي في الدرعية</h3>
+            <p>
+              اتفق الإمام محمد بن سعود مع الشيخ <span class="highlight">محمد بن عبدالوهاب</span> على نشر الدعوة الإصلاحية،
+              في لقاء شكل نقطة تحول كبرى ورسّخ قيام أول كيان سياسي شامل في وسط الجزيرة العربية.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <span class="timeline-date">1824م / 1240هـ</span>
+            <h3>الدولة السعودية الثانية</h3>
+            <p>
+              استعاد الإمام <span class="highlight">تركي بن عبدالله</span> الحكم، وأسس الدولة السعودية الثانية
+              واتخذ من <strong>الرياض</strong> عاصمة لها لأول مرة، لتواصل مسيرة الدولة وتقاليدها في الحكم والبناء.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <span class="timeline-date">1902م / 1319هـ</span>
+            <h3>استرداد الرياض وبداية التوحيد</h3>
+            <p>
+              تمكن الملك <span class="highlight">عبدالعزيز بن عبدالرحمن آل سعود</span> من استرداد الرياض،
+              ليبدأ رحلة توحيد البلاد التي استمرت ثلاثين عامًا، بقيادة حكيمة وإرادة صلبة.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <span class="timeline-date">1932م / 1351هـ</span>
+            <h3>إعلان المملكة العربية السعودية</h3>
+            <p>
+              في <span class="highlight">23 سبتمبر 1932م</span>، أُعلن توحيد البلاد تحت اسم
+              <strong>المملكة العربية السعودية</strong>، لتكون دولة حديثة ذات سيادة كاملة، وعاصمتها الرياض.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- الإنجازات -->
+  <section class="achievements">
+    <div class="container">
+      <div class="section-title">
+        <h2>مسيرة نهضة</h2>
+        <p>منذ التأسيس، والأمن والتنمية والخدمة في صميم الدولة السعودية</p>
+      </div>
+      <div class="cards-grid">
+
+        <div class="achievement-card">
+          <span class="achievement-icon">🕋</span>
+          <h3>خدمة الحرمين</h3>
+          <p>رعاية الحرمين الشريفين وضيوف الرحمن أولوية قصوى توارثها ملوك المملكة جيلًا بعد جيل.</p>
+        </div>
+
+        <div class="achievement-card">
+          <span class="achievement-icon">🛡️</span>
+          <h3>الأمن والاستقرار</h3>
+          <p>ترسيخ الأمن وحفظ النفس والمال والعرض، وبناء مجتمع مستقر ينعم بأساسيات الحياة الكريمة.</p>
+        </div>
+
+        <div class="achievement-card">
+          <span class="achievement-icon">⚖️</span>
+          <h3>العدل أساس الحكم</h3>
+          <p>قامت الدولة على مبادئ الشريعة الإسلامية والعدل، وعلى وحدة الصف والالتزام بالحقوق والواجبات.</p>
+        </div>
+
+        <div class="achievement-card">
+          <span class="achievement-icon">🌱</span>
+          <h3>تنمية مستمرة</h3>
+          <p>من الدولة الأولى إلى رؤية 2030، مسار تنموي لا يتوقف في التعليم والصحة والاقتصاد والبنية التحتية.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- رؤية 2030 -->
+  <div class="container">
+    <div class="vision">
+      <span class="year">2016 · رؤية 2030</span>
+      <h2>نحو مستقبل أكثر ازدهارًا</h2>
+      <p>
+        في عهد خادم الحرمين الشريفين الملك سلمان بن عبدالعزيز، وبدعم ولي العهد الأمير محمد بن سلمان،
+        أُطلقت رؤية 2030 كإطار استراتيجي لإعادة هيكلة الاقتصاد الوطني، وتنويع مصادر الدخل،
+        وتمكين القطاع الخاص، ورفع كفاءة الأداء الحكومي، في امتداد لمسيرة الدولة السعودية الثالثة.
+      </p>
+    </div>
+  </div>
+
+  <!-- التذييل -->
+  <footer>
+    <p>تاريخ المملكة العربية السعودية · ثلاثة قرون من المجد والبناء</p>
+    <p style="margin-top:8px; font-size:13px;">صُممت هذه الصفحة لأغراض تعليمية · <span class="heart">♥</span> وطني (أ.ابراهيم النمشان)</p>
+  </footer>
+
+  <script>
+    // تأثير الظهور التدريجي للعناصر عند التمرير
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.timeline-item, .achievement-card').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
